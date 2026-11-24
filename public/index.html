@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NYC Parade Nav</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside id="panel">
+    <header>
+      <h1>NYC Parade Nav</h1>
+      <p class="sub">100th Macy's Thanksgiving Day Parade · Thu Nov 26</p>
+      <button id="reportBtn" type="button" class="report-btn">📸 Report a blocker</button>
+    </header>
+
+    <section id="reportBox" hidden>
+      <div class="row between"><strong>Report a blocker</strong><button id="reportCancel" type="button">Cancel</button></div>
+      <ol class="steps">
+        <li id="stepPin">Tap the map where it is, or <button id="useHere" type="button">use my location</button>
+          <div id="pinInfo" class="muted"></div></li>
+        <li>Add a photo or screenshot (a barricade, a closed entrance, an MTA/NYPD post)
+          <input id="shot" type="file" accept="image/*" />
+          <img id="shotPreview" alt="" hidden />
+          <div id="readOut" class="muted"></div></li>
+        <li><label>What is it?
+            <select id="kind"></select></label>
+          <label>Note (optional) <input id="note" maxlength="280" placeholder="e.g. NYPD not letting anyone cross at 65th" /></label></li>
+      </ol>
+      <button id="postReport" type="button" class="primary">Post — everyone nearby sees it now</button>
+      <p class="muted">Photos aren't stored. Only the description read from them is shared, and reports expire unless someone confirms them.</p>
+    </section>
+
+    <section id="liveBox">
+      <div class="row between"><strong>Live from New Yorkers</strong><span id="liveDot" class="muted">connecting…</span></div>
+      <ul id="reportList"><li class="muted">No reports yet.</li></ul>
+    </section>
+
+    <section id="clockBox">
+      <div class="row between">
+        <strong id="clockTime">—</strong>
+        <span class="row gap">
+          <select id="speed" title="Clock speed">
+            <option value="0">Paused</option>
+            <option value="1" selected>1×</option>
+            <option value="10">10×</option>
+            <option value="60">60×</option>
+          </select>
+          <button id="liveBtn" type="button" title="Use real time">Live</button>
+        </span>
+      </div>
+      <input id="clockSlider" type="range" min="0" max="660" step="5" />
+      <div id="paradeStatus" class="muted"></div>
+    </section>
+
+    <section>
+      <div class="label">Try a scenario from the outline</div>
+      <div id="scenarios" class="chips"></div>
+    </section>
+
+    <form id="trip">
+      <label>From <input id="origin" required /></label>
+      <label>To <input id="destination" required /></label>
+      <div class="row gap">
+        <label class="grow">Mode
+          <select id="mode">
+            <option value="TRANSIT">Transit</option>
+            <option value="WALK">Walk</option>
+            <option value="BICYCLE">Bike</option>
+            <option value="DRIVE">Drive / rideshare</option>
+          </select>
+        </label>
+        <label class="grow">Transit
+          <select id="transitPreference">
+            <option value="">Fastest</option>
+            <option value="LESS_WALKING">Less walking</option>
+            <option value="FEWER_TRANSFERS">Fewer transfers</option>
+          </select>
+        </label>
+      </div>
+      <div class="row gap">
+        <label class="grow">Leave at <input id="departAt" type="datetime-local" /></label>
+        <label class="grow">or arrive by <input id="arriveBy" type="datetime-local" /></label>
+      </div>
+      <label class="check"><input id="wheelchair" type="checkbox" /> Wheelchair / stroller (step-free, avoid crowds)</label>
+      <button id="go" type="submit">Plan around the parade</button>
+    </form>
+
+    <div id="status"></div>
+    <div id="summary"></div>
+    <div id="options"></div>
+
+    <section id="notifyBox" hidden>
+      <div class="row between"><strong>Live trip</strong><button id="stopWatch" type="button">Stop</button></div>
+      <ul id="events"></ul>
+    </section>
+
+    <details id="sourcesBox">
+      <summary>Data sources &amp; feed health</summary>
+      <ul id="sources"></ul>
+    </details>
+  </aside>
+
+  <main id="map"></main>
+  <div id="toast" role="status" hidden></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

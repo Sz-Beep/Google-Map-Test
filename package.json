@@ -1,0 +1,16 @@
+{
+  "name": "nyc-nav",
+  "version": "0.1.0",
+  "description": "NYC parade-day navigation agent on Google Maps Platform",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --env-file=.env server.js",
+    "test": "node --test test/*.test.js",
+    "dev": "node --watch --env-file=.env server.js"
+  },
+  "engines": { "node": ">=20.6" },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
